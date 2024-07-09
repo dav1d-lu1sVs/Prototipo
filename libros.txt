@@ -1,9 +1,6 @@
 Elvisitante 5 10.00$
 Elreino 9 45.00$
-Laotragente 5  11.50$
-Srel 8  9.50$
-l 4  5.00$
-jks 5  7.00$
-Theyboys 9  10.00$
-Almanaque 1  100.00$
-Back 5  40.00$
+Laotragente 5 11.50$
+Theyboys 9 10.00$
+Almanaque 1 100.00$
+Back 5 40.00$

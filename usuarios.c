@@ -7,7 +7,7 @@ int leerEnteroEntre(char*, int, int);
 int leerEnteroPositivo(char*);
 float leerFlotantePositivo(char*);
 
-void agregarLibro(char[][50], int[], float[], int*);
+void agregarLibro(char[][50], int[], float[], int, int, int);
 void mostrarmenu();
 void ingresarUsuario();
 void buscarPosicion(const char*, long*);
@@ -20,6 +20,8 @@ int main(int argc, char const *argv[]) {
     char nombres[LONGITUD][50];  
     int cantidades[LONGITUD];
     float precios[LONGITUD];  
+    int noma;
+    int i=0;
 
     printf("--> * Bienvenido a la Libreria Andina* <--\n");
 
@@ -29,7 +31,7 @@ int main(int argc, char const *argv[]) {
 
         switch (opcion) {
             case 1:
-                agregarLibro(nombres, cantidades, precios, &tamano);
+                agregarLibro(nombres, cantidades, precios, i, noma, tamano);
                 printf("\nInventario modificado:\n");
                 break;
             case 2:
@@ -109,27 +111,30 @@ void mostrarmenu() {
     printf("********************\n");
 }
 
-void agregarLibro(char nombres[][50], int cantidades[], float precios[], int* tamano) {
-    int noma = leerEnteroPositivo("\nIngrese la cantidad de libros a almacenar: ");
-    FILE *archivo = fopen("libros.txt", "a");
 
-    if (archivo == NULL) {
-        printf("No se pudo abrir el archivo");
+void agregarLibro(char nombres[][50], int cantidades[], float precios[], int i, int tamano, int noma){
+    printf("-------------------------------------------------------------------\n");
+    noma = leerEnteroPositivo("\nIngrese la nueva cantidad de libros a almacenar: ");
+    FILE *archivo;
+    archivo = fopen("libros.txt","a");
+    
+    if(archivo == NULL){
+        printf("No se abrio el archivo");
         return;
     }
-
     for (int i = 0; i < noma; i++) {
         printf(" -----------------------------------------\n"); 
         printf("Ingrese el nombre del libro %d: ", i + 1);
-        scanf("%s", nombres[*tamano]);
-        cantidades[*tamano] = leerEnteroPositivo("Ingrese la cantidad de libros del ejemplar ingresado: ");
-        precios[*tamano] = leerFlotantePositivo("Ingrese el precio del libro por unidad en dolares: ");
-        fprintf(archivo, "%s %d  %.2f\n", nombres[*tamano], cantidades[*tamano], precios[*tamano]);
-        (*tamano)++;
+        scanf("%s", nombres[i]);
+        cantidades[i]=leerEnteroPositivo("Ingrese la cantidad de libros del ejemplar ingresdo: ");
+        precios[i]=leerFlotantePositivo("Ingrese el precio del libro por unidad en dolares: ");
+   
+    tamano=noma;
+    printf("-------------------------------------------------------------------\n");
+     fprintf(archivo,"%s %d %.2f\n", nombres[i],cantidades[i], precios[i]);
     }
-
     fclose(archivo);
-}
+    }
 
 float leerFlotantePositivo(char* mensaje) {
     float valor;
@@ -269,12 +274,12 @@ void eliminarLibro() {
     float precio;
     int econtrado = 0;
 
-    while (fscanf(archivo, "%s %d %f", nombre, &cantidad, &precio) == 3) {
+    while (fscanf(archivo, "%s %d %f$", nombre, &cantidad, &precio) != EOF) { //El bucle se repite hasta que llegue al final del archivo por EOF(End Of File)
         if (strcmp(nombre, nombreLibro) == 0) {
-            econtrado = ftell(archivo) - (strlen(nombre) + sizeof(cantidad) + sizeof(precio) + 2);
+            econtrado == 1;
             continue; // Omitir la escritura de este libro al archivo temporal
         }
-        fprintf(tempArchivo, "%s %d %.2f\n", nombre, cantidad, precio);
+        fprintf(tempArchivo, "%s %d %.2f$\n", nombre, cantidad, precio);
     }
 
     fclose(archivo);
@@ -284,9 +289,9 @@ void eliminarLibro() {
     remove("libros.txt");
     rename("tempLibros.txt", "libros.txt");
 
-    if (econtrado=2)
+    if (econtrado==1){
         printf("Libro eliminado correctamente.\n");
-    else
+    }else{
         printf("Libro no encontrado.\n");
+    }
 }
-
