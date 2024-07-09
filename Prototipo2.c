@@ -69,7 +69,13 @@ int main(int argc, char const *argv[]) {
                 sleep(1);
                 printf("el ");
                 sleep(1);
-                printf("programa...\n");
+                printf("programa");
+                sleep(1);
+                printf(".");
+                sleep(1);
+                printf(".");
+                sleep(1);
+                printf(".\n");
                 printf("------------------------------------\n");
                 break;
             default:
@@ -135,8 +141,14 @@ void controlInventario(char libros[][50], int cantidades[], float precios[], int
                 break;
             case 5:
                 printf("------------------------------------\n");
-                printf("Regresando a menu principal...\n");
-                
+                sleep(1);
+                printf("Regresando");
+                 sleep(1);
+                printf(".");
+                sleep(1);
+                printf(".");
+                sleep(1);
+                printf(".\n");
                 break;
                 
             default:
@@ -258,7 +270,14 @@ void controlUsuario(char usuarioN[][50], char usuarioAp[][50], int cedula[], cha
                 break;
             case 4:
                 printf("------------------------------------\n");
-                printf("Regresando a menu principal...\n");
+                sleep(1);
+                printf("Regresando");
+                sleep(1);
+                printf(".");
+                sleep(1);
+                printf(".");
+                sleep(1);
+                printf(".\n");
                 break;
                 
             default:
